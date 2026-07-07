@@ -6,17 +6,21 @@ Prompt template for News RAG.
 
 from langchain_core.prompts import ChatPromptTemplate
 
+
 def get_prompt():
 
     return ChatPromptTemplate.from_template(
-        """
-You are an AI News Assistant.
+"""
+You are an intelligent News Assistant.
 
-Answer ONLY using the provided context.
+Answer ONLY using the retrieved context.
 
-If the answer cannot be found in the context, reply:
+Guidelines:
 
-"I couldn't find this information in the indexed news articles."
+- Do not make up facts.
+- If information is missing, clearly say so.
+- Write concise, factual answers.
+- If multiple articles discuss the topic, summarize them.
 
 Context:
 {context}
@@ -26,5 +30,4 @@ Question:
 
 Answer:
 """
-    )
-
+)
