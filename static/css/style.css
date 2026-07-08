@@ -1,51 +1,373 @@
+/* ===========================
+   Google Font
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ===========================
+   Global
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
 body{
 
-    font-family:Arial;
+    font-family:'Inter',sans-serif;
 
-    background:#f4f4f4;
+    background:#f3f6fb;
+
+    color:#1f2937;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    padding:50px 20px;
 
 }
+
+/* ===========================
+   Main Container
+=========================== */
 
 .container{
 
-    width:800px;
+    width:100%;
 
-    margin:auto;
-
-    margin-top:50px;
+    max-width:900px;
 
 }
+
+/* ===========================
+   Header
+=========================== */
+
+.header{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.header h1{
+
+    font-size:40px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.header p{
+
+    color:#6b7280;
+
+    font-size:17px;
+
+}
+
+/* ===========================
+   Card
+=========================== */
+
+.card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+    margin-bottom:25px;
+
+}
+
+/* ===========================
+   Textarea
+=========================== */
 
 textarea{
 
     width:100%;
 
-    height:120px;
+    height:170px;
 
-    padding:10px;
+    resize:none;
+
+    border:1px solid #d1d5db;
+
+    border-radius:12px;
+
+    padding:18px;
 
     font-size:16px;
 
+    font-family:inherit;
+
+    outline:none;
+
+    transition:.25s;
+
 }
+
+textarea:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.15);
+
+}
+
+/* ===========================
+   Button
+=========================== */
 
 button{
 
-    margin-top:15px;
+    margin-top:18px;
 
-    padding:12px 25px;
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:14px 28px;
+
+    font-size:16px;
+
+    font-weight:600;
 
     cursor:pointer;
+
+    transition:.25s;
+
+}
+
+button:hover{
+
+    background:#1d4ed8;
+
+}
+
+button:disabled{
+
+    background:#94a3b8;
+
+    cursor:not-allowed;
+
+}
+
+/* ===========================
+   Loading
+=========================== */
+
+#loading{
+
+    display:none;
+
+    margin-top:25px;
+
+    text-align:center;
+
+    color:#2563eb;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+/* ===========================
+   Answer Card
+=========================== */
+
+#answer-card{
+
+    display:none;
 
 }
 
 #answer{
 
-    margin-top:30px;
+    margin-top:15px;
+
+    line-height:1.8;
+
+    white-space:pre-wrap;
+
+    font-size:16px;
+
+}
+
+/* ===========================
+   Sources
+=========================== */
+
+#sources-card{
+
+    display:none;
+
+}
+
+#sources{
+
+    margin-top:18px;
+
+}
+
+.source{
+
+    background:#f8fafc;
+
+    border-left:5px solid #2563eb;
+
+    border-radius:10px;
+
+    padding:15px;
+
+    margin-bottom:15px;
+
+}
+
+.source h4{
+
+    font-size:16px;
+
+    margin-bottom:8px;
+
+}
+
+.source a{
+
+    color:#2563eb;
+
+    text-decoration:none;
+
+    word-break:break-word;
+
+}
+
+.source a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ===========================
+   Error
+=========================== */
+
+.error{
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+    padding:16px;
+
+    border-radius:10px;
+
+    margin-top:20px;
+
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:768px){
+
+    body{
+
+        padding:25px 15px;
+
+    }
+
+    .header h1{
+
+        font-size:32px;
+
+    }
+
+    textarea{
+
+        height:150px;
+
+    }
+
+}
+
+/* ---------------- Answer ---------------- */
+
+#loading{
+    display:none;
+    margin-top:20px;
+    color:#2563eb;
+    font-weight:600;
+}
+
+#answer-card,
+#sources-card{
+
+    margin-top:25px;
+
+    display:none;
 
     background:white;
 
+    border-radius:16px;
+
     padding:20px;
 
-    border-radius:8px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+#answer{
+
+    white-space:pre-wrap;
+
+    line-height:1.8;
+
+    color:#333;
+
+}
+
+.source{
+
+    margin-top:15px;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    background:#f8fafc;
+
+}
+
+.source a{
+
+    color:#2563eb;
+
+    text-decoration:none;
+
+}
+
+.source a:hover{
+
+    text-decoration:underline;
 
 }

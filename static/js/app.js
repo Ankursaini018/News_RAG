@@ -4,53 +4,110 @@ const questionInput = document.getElementById("question");
 
 const answerDiv = document.getElementById("answer");
 
+const loading = document.getElementById("loading");
+
+const answerCard = document.getElementById("answer-card");
+
+const sourcesCard = document.getElementById("sources-card");
+
+const sourcesDiv = document.getElementById("sources");
+
 askButton.addEventListener("click", askQuestion);
 
 async function askQuestion() {
 
     const question = questionInput.value.trim();
 
-    if (!question) {
+    if(question===""){
 
-        alert("Please enter a question.");
+        alert("Enter a question.");
 
         return;
+
     }
 
-    answerDiv.innerHTML = "Thinking...";
+    loading.style.display="block";
 
-    try {
+    answerCard.style.display="none";
 
-        const response = await fetch("/ask", {
+    sourcesCard.style.display="none";
 
-            method: "POST",
+    answerDiv.innerHTML="";
 
-            headers: {
+    sourcesDiv.innerHTML="";
 
-                "Content-Type": "application/json"
+    askButton.disabled=true;
+
+    askButton.innerText="Thinking...";
+
+    try{
+
+        const response=await fetch("/ask",{
+
+            method:"POST",
+
+            headers:{
+
+                "Content-Type":"application/json"
 
             },
 
-            body: JSON.stringify({
+            body:JSON.stringify({
 
-                question: question
+                question:question
 
             })
 
         });
 
-        const data = await response.json();
+        const data=await response.json();
 
-        answerDiv.innerHTML = data.answer;
+        answerCard.style.display="block";
+
+        answerDiv.innerHTML=data.answer;
+
+        if(data.sources.length){
+
+            sourcesCard.style.display="block";
+
+            data.sources.forEach(source=>{
+
+                sourcesDiv.innerHTML+=`
+
+                <div class="source">
+
+                    <strong>${source.title}</strong>
+
+                    <br>
+
+                    <a href="${source.url}" target="_blank">
+
+                    ${source.url}
+
+                    </a>
+
+                </div>
+
+                `;
+
+            });
+
+        }
 
     }
 
-    catch (error) {
+    catch(err){
 
-        console.error(error);
+        answerCard.style.display="block";
 
-        answerDiv.innerHTML = "Something went wrong.";
+        answerDiv.innerHTML="Something went wrong.";
 
     }
+
+    loading.style.display="none";
+
+    askButton.disabled=false;
+
+    askButton.innerHTML="🚀 Ask AI";
 
 }

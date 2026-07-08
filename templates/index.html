@@ -2,34 +2,69 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>News RAG</title>
 
     <link rel="stylesheet" href="/static/css/style.css">
+
 </head>
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>📰 News RAG</h1>
+    <div class="header">
+
+        <h1>📰 News RAG Assistant</h1>
+
+        <p>Ask questions about the latest BBC News.</p>
+
+    </div>
+
+    <div class="card">
 
         <textarea
             id="question"
-            placeholder="Ask anything about the news..."
+            placeholder="Ask anything about today's news..."
         ></textarea>
 
         <button id="askBtn">
-            Ask AI
+
+            🚀 Ask AI
+
         </button>
 
-        <hr>
+    </div>
+
+    <div id="loading" style="display:none;">
+
+        Thinking...
+
+    </div>
+
+    <div id="answer-card">
+
+        <h2>🤖 Answer</h2>
 
         <div id="answer"></div>
 
     </div>
 
-    <script src="/static/js/app.js"></script>
+    <div id="sources-card">
+
+        <h2>📚 Sources</h2>
+
+        <div id="sources"></div>
+
+    </div>
+
+</div>
+
+<script src="/static/js/app.js"></script>
 
 </body>
 
