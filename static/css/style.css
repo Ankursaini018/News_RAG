@@ -1,0 +1,41 @@
+body{
+
+    margin:0;
+
+    font-family:Arial;
+
+    background:#111827;
+
+    color:white;
+
+}
+
+.container{
+
+    width:80%;
+
+    margin:auto;
+
+    margin-top:120px;
+
+    text-align:center;
+
+}
+
+button{
+
+    padding:15px 30px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+}
