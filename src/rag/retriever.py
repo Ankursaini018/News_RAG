@@ -59,9 +59,9 @@ def display_results(documents):
 
         print()
 
-def main():
+def get_retriever():
 
-    _, embeddings = embedding_module.main()
+    chunks, embeddings = embedding_module.main()
 
     vector_store = vector_store_module.load_vector_store(
         embeddings
@@ -71,16 +71,12 @@ def main():
         vector_store
     )
 
-    documents = test_retriever(
-        retriever
-    )
-
-    display_results(
-        documents
-    )
-
     return retriever
 
 if __name__ == "__main__":
 
-    main()        
+    retriever = get_retriever()
+
+    documents = test_retriever(retriever)
+
+    display_results(documents)

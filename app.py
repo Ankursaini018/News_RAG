@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from contextlib import asynccontextmanager
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import sys
@@ -13,9 +14,21 @@ from src.api_models import (
     QuestionResponse
 )
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+
+    print("Loading News RAG...")
+
+    app.state.rag_chain = create_rag_chain()
+
+    print("News RAG Loaded!")
+
+    yield
+
 app = FastAPI(
     title="News RAG",
-    version="1.0"
+    version="1.0",
+    lifespan=lifespan
 )
 
 app.mount(
@@ -25,7 +38,6 @@ app.mount(
 )
 
 templates = Jinja2Templates(directory="templates")
-rag_chain = create_rag_chain()
 
 
 @app.get("/")
@@ -40,10 +52,13 @@ async def home(request: Request):
     )
 
 @app.post("/ask")
-async def ask_news(request: QuestionRequest):
+async def ask_news(
+    request: QuestionRequest,
+    http_request: Request
+):
 
     result = ask_question(
-        rag_chain,
+        http_request.app.state.rag_chain,
         request.question
     )
 

@@ -45,7 +45,7 @@ def create_document_chain(llm):
 
 def create_rag_chain():
 
-    retriever = retriever_module.main()
+    retriever = retriever_module.get_retriever()
 
     llm = create_llm()
 

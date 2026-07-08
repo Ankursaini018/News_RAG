@@ -1,38 +1,35 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
-
+    <meta charset="UTF-8">
     <title>News RAG</title>
 
-    <link
-        rel="stylesheet"
-        href="/static/css/style.css"
-    >
-
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 
 <body>
 
     <div class="container">
 
-        <h1>📰 News RAG Assistant</h1>
+        <h1>📰 News RAG</h1>
 
-        <p>
+        <textarea
+            id="question"
+            placeholder="Ask anything about the news..."
+        ></textarea>
 
-            AI-powered News Search using
-            LangChain + FAISS + Groq
-
-        </p>
-
-        <button>
-
-            Coming Soon 🚀
-
+        <button id="askBtn">
+            Ask AI
         </button>
 
+        <hr>
+
+        <div id="answer"></div>
+
     </div>
+
+    <script src="/static/js/app.js"></script>
 
 </body>
 
