@@ -32,10 +32,6 @@ body{
 
 }
 
-/* ===========================
-   Main Container
-=========================== */
-
 .container{
 
     width:100%;
@@ -80,7 +76,7 @@ body{
 
 .card{
 
-    background:white;
+    background:#fff;
 
     border-radius:18px;
 
@@ -174,19 +170,63 @@ button:disabled{
    Loading
 =========================== */
 
+.hidden{
+
+    display:none !important;
+
+}
+
 #loading{
 
-    display:none;
+    display:flex;
 
-    margin-top:25px;
+    flex-direction:column;
 
-    text-align:center;
+    align-items:center;
+
+    justify-content:center;
+
+    margin:30px 0;
 
     color:#2563eb;
 
-    font-size:18px;
-
     font-weight:600;
+
+}
+
+/* Spinner */
+
+.spinner{
+
+    width:48px;
+
+    height:48px;
+
+    border:5px solid #dbeafe;
+
+    border-top:5px solid #2563eb;
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+    margin-bottom:15px;
+
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
 
 }
 
@@ -194,9 +234,20 @@ button:disabled{
    Answer Card
 =========================== */
 
-#answer-card{
+#answer-card,
+#sources-card{
 
     display:none;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    margin-top:25px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
 
 }
 
@@ -215,12 +266,6 @@ button:disabled{
 /* ===========================
    Sources
 =========================== */
-
-#sources-card{
-
-    display:none;
-
-}
 
 #sources{
 
@@ -244,9 +289,9 @@ button:disabled{
 
 .source h4{
 
-    font-size:16px;
-
     margin-bottom:8px;
+
+    font-size:16px;
 
 }
 
@@ -292,13 +337,13 @@ button:disabled{
 
     body{
 
-        padding:25px 15px;
+        padding:20px;
 
     }
 
     .header h1{
 
-        font-size:32px;
+        font-size:30px;
 
     }
 
@@ -310,51 +355,133 @@ button:disabled{
 
 }
 
-/* ---------------- Answer ---------------- */
+/* =====================================================
+   Chat History
+===================================================== */
 
-#loading{
-    display:none;
-    margin-top:20px;
-    color:#2563eb;
-    font-weight:600;
+#chat-history{
+
+    margin-top:30px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
 }
 
-#answer-card,
-#sources-card{
+/* ===========================
+   Message Card
+=========================== */
 
-    margin-top:25px;
-
-    display:none;
-
-    background:white;
+.message{
 
     border-radius:16px;
 
     padding:20px;
 
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+    animation:fadeIn .35s ease;
 
 }
 
-#answer{
+/* ===========================
+   User Message
+=========================== */
 
-    white-space:pre-wrap;
+.user-message{
+
+    background:#2563eb;
+
+    color:white;
+
+    align-self:flex-end;
+
+    width:80%;
+
+}
+
+/* ===========================
+   AI Message
+=========================== */
+
+.ai-message{
+
+    background:white;
+
+    color:#1f2937;
+
+    align-self:flex-start;
+
+    width:100%;
+
+}
+
+/* ===========================
+   Message Header
+=========================== */
+
+.message-header{
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+    font-size:17px;
+
+}
+
+/* ===========================
+   Message Body
+=========================== */
+
+.message-body{
 
     line-height:1.8;
 
-    color:#333;
+    white-space:pre-wrap;
 
 }
 
+/* ===========================
+   Sources Section
+=========================== */
+
+.sources{
+
+    margin-top:20px;
+
+    border-top:1px solid #e5e7eb;
+
+    padding-top:15px;
+
+}
+
+.sources h4{
+
+    margin-bottom:15px;
+
+    color:#2563eb;
+
+}
+
+/* ===========================
+   Source Card
+=========================== */
+
 .source{
 
-    margin-top:15px;
+    background:#f8fafc;
 
-    padding:15px;
+    border-left:4px solid #2563eb;
 
     border-radius:10px;
 
-    background:#f8fafc;
+    padding:12px;
+
+    margin-bottom:12px;
 
 }
 
@@ -364,10 +491,36 @@ button:disabled{
 
     text-decoration:none;
 
+    word-break:break-word;
+
 }
 
 .source a:hover{
 
     text-decoration:underline;
+
+}
+
+/* ===========================
+   Animation
+=========================== */
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
 
 }

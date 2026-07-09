@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>News RAG</title>
+    <title>News RAG Assistant</title>
 
     <link rel="stylesheet" href="/static/css/style.css">
 
@@ -15,56 +15,61 @@
 
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <div class="header">
+        <div class="header">
 
-        <h1>📰 News RAG Assistant</h1>
+            <h1>📰 News RAG Assistant</h1>
 
-        <p>Ask questions about the latest BBC News.</p>
+            <p>Ask questions about the latest BBC News.</p>
+
+        </div>
+
+        <div class="card">
+
+            <textarea
+                id="question"
+                placeholder="Ask anything about today's news..."
+            ></textarea>
+
+            <button id="askBtn">
+                🚀 Ask AI
+            </button>
+
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="hidden">
+
+            <div class="spinner"></div>
+
+            <p>Thinking...</p>
+
+        </div>
+
+        <!-- Answer -->
+        <div id="chat-history">
+
+        </div>
+
+            <h2>🤖 Answer</h2>
+
+            <div id="answer"></div>
+
+        </div>
+
+        <!-- Sources -->
+        <div id="sources-card">
+
+            <h2>📚 Sources</h2>
+
+            <div id="sources"></div>
+
+        </div>
 
     </div>
 
-    <div class="card">
-
-        <textarea
-            id="question"
-            placeholder="Ask anything about today's news..."
-        ></textarea>
-
-        <button id="askBtn">
-
-            🚀 Ask AI
-
-        </button>
-
-    </div>
-
-    <div id="loading" style="display:none;">
-
-        Thinking...
-
-    </div>
-
-    <div id="answer-card">
-
-        <h2>🤖 Answer</h2>
-
-        <div id="answer"></div>
-
-    </div>
-
-    <div id="sources-card">
-
-        <h2>📚 Sources</h2>
-
-        <div id="sources"></div>
-
-    </div>
-
-</div>
-
-<script src="/static/js/app.js"></script>
+    <script src="/static/js/app.js"></script>
 
 </body>
 
