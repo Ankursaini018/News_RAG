@@ -24,13 +24,18 @@ load_dotenv()
 
 MODEL_NAME = "llama-3.3-70b-versatile"
 
+TEMPERATURE = 0
+
 
 def create_llm():
 
     return ChatGroq(
-        model=MODEL_NAME,
-        temperature=0
-    )
+
+    model=MODEL_NAME,
+
+    temperature=TEMPERATURE
+
+)
 
 
 def create_document_chain(llm):
@@ -79,8 +84,13 @@ def ask_question(rag_chain, question):
             }
         )
 
+    answer = response["answer"]
+
+    if "couldn't find" in answer.lower():
+        sources = []
+
     return {
-        "answer": response["answer"],
+        "answer": answer,
         "sources": sources
     }
 

@@ -11,7 +11,7 @@ import processing.vector_store as vector_store_module
 
 SEARCH_TYPE = "similarity"
 
-TOP_K = 4
+TOP_K = 5
 
 def create_retriever(vector_store):
 
