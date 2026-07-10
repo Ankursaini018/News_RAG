@@ -1,76 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>News RAG Assistant</title>
-
     <link rel="stylesheet" href="/static/css/style.css">
-
 </head>
-
 <body>
+    <div class="shell">
+        <section class="hero">
+            <span class="eyebrow">AI-powered newsroom search</span>
+            <h1>News RAG Assistant</h1>
+            <p>Ask natural questions and get grounded answers from curated BBC news stories.</p>
 
-    <div class="container">
+            <div class="suggestions" aria-label="Suggested prompts">
+                <button class="chip" type="button" data-question="What are the biggest stories today?">What are the biggest stories today?</button>
+                <button class="chip" type="button" data-question="Summarize the latest technology news.">Summarize the latest technology news.</button>
+                <button class="chip" type="button" data-question="What happened in global politics recently?">What happened in global politics recently?</button>
+            </div>
+        </section>
 
-        <div class="header">
+        <section class="panel">
+            <label class="sr-only" for="question">Ask a question about the news</label>
+            <textarea id="question" placeholder="Ask anything about today's news..."></textarea>
 
-            <h1>📰 News RAG Assistant</h1>
+            <div class="actions">
+                <button id="askBtn" type="button">Ask AI</button>
+                <span class="hint">Press Enter to send</span>
+            </div>
 
-            <p>Ask questions about the latest BBC News.</p>
+            <div id="loading" class="hidden" aria-live="polite">
+                <div class="spinner"></div>
+                <p>Thinking...</p>
+            </div>
 
-        </div>
-
-        <div class="card">
-
-            <textarea
-                id="question"
-                placeholder="Ask anything about today's news..."
-            ></textarea>
-
-            <button id="askBtn">
-                🚀 Ask AI
-            </button>
-
-        </div>
-
-        <!-- Loading -->
-        <div id="loading" class="hidden">
-
-            <div class="spinner"></div>
-
-            <p>Thinking...</p>
-
-        </div>
-
-        <!-- Answer -->
-        <div id="chat-history">
-
-        </div>
-
-            <h2>🤖 Answer</h2>
-
-            <div id="answer"></div>
-
-        </div>
-
-        <!-- Sources -->
-        <div id="sources-card">
-
-            <h2>📚 Sources</h2>
-
-            <div id="sources"></div>
-
-        </div>
-
+            <div id="chat-history" aria-live="polite"></div>
+        </section>
     </div>
 
     <script src="/static/js/app.js"></script>
-
 </body>
-
 </html>

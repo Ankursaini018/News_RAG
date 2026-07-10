@@ -1,234 +1,96 @@
 const askButton = document.getElementById("askBtn");
 const questionInput = document.getElementById("question");
-
 const loading = document.getElementById("loading");
-
 const chatHistory = document.getElementById("chat-history");
-
-/* -----------------------------------
-   Ask Button
------------------------------------ */
+const suggestionChips = document.querySelectorAll(".chip");
 
 askButton.addEventListener("click", askQuestion);
 
-/* -----------------------------------
-   Press Enter to Send
------------------------------------ */
-
-questionInput.addEventListener("keydown", function(event){
-
-    if(event.key==="Enter" && !event.shiftKey){
-
+questionInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();
-
         askQuestion();
-
     }
-
 });
 
-/* -----------------------------------
-   Add User Message
------------------------------------ */
+suggestionChips.forEach((chip) => {
+    chip.addEventListener("click", () => {
+        questionInput.value = chip.dataset.question || "";
+        questionInput.focus();
+    });
+});
 
-function addUserMessage(question){
-
+function addUserMessage(question) {
     chatHistory.innerHTML += `
-
-    <div class="message user-message">
-
-        <div class="message-header">
-
-            👤 You
-
+        <div class="message user-message">
+            <div class="message-header">👤 You</div>
+            <div class="message-body">${question}</div>
         </div>
-
-        <div class="message-body">
-
-            ${question}
-
-        </div>
-
-    </div>
-
     `;
-
 }
 
-/* -----------------------------------
-   Add AI Message
------------------------------------ */
+function addAIMessage(answer, sources = []) {
+    let sourcesMarkup = "";
 
-function addAIMessage(answer,sources){
-
-    let html="";
-
-    if(sources.length){
-
-        html+=`
-
-        <div class="sources">
-
-            <h4>📚 Sources</h4>
-
-        `;
-
-        sources.forEach((source,index)=>{
-
-            html+=`
-
-            <div class="source">
-
-                <strong>${index+1}. ${source.title}</strong>
-
-                <br>
-
-                <a href="${source.url}" target="_blank">
-
-                    ${source.url}
-
-                </a>
-
+    if (Array.isArray(sources) && sources.length) {
+        sourcesMarkup = `
+            <div class="sources">
+                <h4>📚 Sources</h4>
+                ${sources.map((source, index) => `
+                    <div class="source">
+                        <strong>${index + 1}. ${source.title || "Source"}</strong>
+                        <a href="${source.url || "#"}" target="_blank" rel="noreferrer">${source.url || "Open source"}</a>
+                    </div>
+                `).join("")}
             </div>
-
-            `;
-
-        });
-
-        html+=`</div>`;
-
+        `;
     }
 
     chatHistory.innerHTML += `
-
-    <div class="message ai-message">
-
-        <div class="message-header">
-
-            🤖 News RAG
-
+        <div class="message ai-message">
+            <div class="message-header">🤖 News RAG</div>
+            <div class="message-body">${answer || "No answer available yet."}</div>
+            ${sourcesMarkup}
         </div>
-
-        <div class="message-body">
-
-            ${answer}
-
-        </div>
-
-        ${html}
-
-    </div>
-
     `;
-
 }
 
-/* -----------------------------------
-   Ask Question
------------------------------------ */
+async function askQuestion() {
+    const question = questionInput.value.trim();
 
-async function askQuestion(){
-
-    const question=questionInput.value.trim();
-
-    if(question===""){
-
-        alert("Please enter a question.");
-
+    if (!question) {
+        questionInput.focus();
         return;
-
     }
 
     addUserMessage(question);
-
-    questionInput.value="";
+    questionInput.value = "";
 
     loading.classList.remove("hidden");
+    askButton.disabled = true;
+    askButton.textContent = "Thinking...";
+    chatHistory.scrollTop = chatHistory.scrollHeight;
 
-    askButton.disabled=true;
-
-    askButton.innerHTML="⏳ Thinking...";
-
-    chatHistory.scrollTop=chatHistory.scrollHeight;
-
-    try{
-
-        const response=await fetch("/ask",{
-
-            method:"POST",
-
-            headers:{
-
-                "Content-Type":"application/json"
-
+    try {
+        const response = await fetch("/ask", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-
-            body:JSON.stringify({
-
-                question:question
-
-            })
-
+            body: JSON.stringify({ question })
         });
 
-        if(!response.ok){
-
+        if (!response.ok) {
             throw new Error("Server Error");
-
         }
 
-        const data=await response.json();
-
-        addAIMessage(
-
-            data.answer,
-
-            data.sources
-
-        );
-
-    }
-
-    catch(error){
-
-        chatHistory.innerHTML+=`
-
-        <div class="message ai-message">
-
-            <div class="message-header">
-
-                ⚠ Error
-
-            </div>
-
-            <div class="message-body">
-
-                Unable to contact News RAG.
-
-            </div>
-
-        </div>
-
-        `;
-
-    }
-
-    finally{
-
+        const data = await response.json();
+        addAIMessage(data.answer, data.sources);
+    } catch (error) {
+        addAIMessage("I could not reach the assistant right now. Please try again in a moment.", []);
+    } finally {
         loading.classList.add("hidden");
-
-        askButton.disabled=false;
-
-        askButton.innerHTML="🚀 Ask AI";
-
-        window.scrollTo({
-
-            top:document.body.scrollHeight,
-
-            behavior:"smooth"
-
-        });
-
+        askButton.disabled = false;
+        askButton.textContent = "Ask AI";
     }
-
 }
