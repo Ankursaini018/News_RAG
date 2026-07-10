@@ -45,7 +45,29 @@ async def home(request: Request):
 
     return templates.TemplateResponse(
         request=request,
+        name="home.html",
+        context={
+            "request": request
+        }
+    )
+
+@app.get("/chat")
+async def chat_page(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
         name="index.html",
+        context={
+            "request": request
+        }
+    )
+
+@app.get("/about")
+async def about_page(request: Request):
+
+    return templates.TemplateResponse(
+        request=request,
+        name="about.html",
         context={
             "request": request
         }
