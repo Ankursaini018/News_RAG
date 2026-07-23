@@ -3,40 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News RAG Assistant</title>
+    <title>News RAG AI Assistant</title>
+    <meta name="description" content="Ask intelligent questions about the latest BBC News with a premium AI assistant.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body>
-    <div class="shell">
-        <section class="hero">
-            <span class="eyebrow">AI-powered newsroom search</span>
-            <h1>News RAG Assistant</h1>
-            <p>Ask natural questions and get grounded answers from curated BBC news stories.</p>
-
-            <div class="suggestions" aria-label="Suggested prompts">
-                <button class="chip" type="button" data-question="What are the biggest stories today?">What are the biggest stories today?</button>
-                <button class="chip" type="button" data-question="Summarize the latest technology news.">Summarize the latest technology news.</button>
-                <button class="chip" type="button" data-question="What happened in global politics recently?">What happened in global politics recently?</button>
-            </div>
-        </section>
-
-        <section class="panel">
-            <label class="sr-only" for="question">Ask a question about the news</label>
-            <textarea id="question" placeholder="Ask anything about today's news..."></textarea>
-
-            <div class="actions">
-                <button id="askBtn" type="button">Ask AI</button>
-                <span class="hint">Press Enter to send</span>
-            </div>
-
-            <div id="loading" class="hidden" aria-live="polite">
-                <div class="spinner"></div>
-                <p>Thinking...</p>
-            </div>
-
-            <div id="chat-history" aria-live="polite"></div>
-        </section>
+<body class="chat-page">
+    <div class="ambient" aria-hidden="true">
+        <div class="ambient-grid"></div>
+        <div class="blob blob-a"></div>
+        <div class="blob blob-b"></div>
+        <div class="blob blob-c"></div>
+        <div class="glow glow-a"></div>
+        <div class="glow glow-b"></div>
+        <div class="particles">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="glass-light"></div>
     </div>
+
+    <header class="site-header">
+        <div class="brand">
+            <div class="brand-logo" aria-hidden="true">
+                <span class="logo-core"></span>
+                <span class="logo-ring"></span>
+                <span class="logo-ring logo-ring-2"></span>
+            </div>
+            <div class="brand-copy">
+                <h1>News RAG AI Assistant</h1>
+                <p>Ask intelligent questions about the latest BBC News</p>
+            </div>
+        </div>
+
+        <nav class="site-nav" aria-label="Primary">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a class="nav-github" href="https://github.com/Ankursaini018/News_RAG" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.84c.85.004 1.71.12 2.51.34 1.9-1.32 2.74-1.05 2.74-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .26.18.58.69.48A10.04 10.04 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/>
+                </svg>
+                GitHub
+            </a>
+        </nav>
+    </header>
+
+    <main class="app-shell">
+        <section class="hero-stage" data-parallax>
+            <div class="hero-copy">
+                <span class="eyebrow">Grounded · Source-backed · Real-time RAG</span>
+                <h2>Ask the news. Get answers you can trust.</h2>
+                <p>A premium AI workspace for exploring BBC stories with retrieval-augmented clarity.</p>
+
+                <div class="suggestions" aria-label="Suggested prompts">
+                    <button class="chip" type="button" data-question="What are the biggest stories today?">Biggest stories today</button>
+                    <button class="chip" type="button" data-question="Summarize the latest technology news.">Latest technology news</button>
+                    <button class="chip" type="button" data-question="What happened in global politics recently?">Global politics update</button>
+                </div>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+                <div class="ai-orbit orbit-outer"></div>
+                <div class="ai-orbit orbit-mid"></div>
+                <div class="ai-orbit orbit-inner"></div>
+                <div class="ai-sphere sphere-a"></div>
+                <div class="ai-sphere sphere-b"></div>
+                <div class="ai-sphere sphere-c"></div>
+                <div class="ai-core">
+                    <span class="core-pulse"></span>
+                    <span class="core-shine"></span>
+                </div>
+                <div class="floating-node node-1"></div>
+                <div class="floating-node node-2"></div>
+                <div class="floating-node node-3"></div>
+            </div>
+        </section>
+
+        <section class="chat-workspace" aria-label="Conversation">
+            <div class="chat-panel glass-panel">
+                <div class="chat-toolbar">
+                    <div class="chat-status">
+                        <span class="status-dot"></span>
+                        <span>Live assistant</span>
+                    </div>
+                    <button id="clearBtn" class="ghost-btn" type="button" title="Clear conversation">
+                        Clear Chat
+                    </button>
+                </div>
+
+                <div id="chat-history" class="chat-history" aria-live="polite">
+                    <div class="empty-state" id="emptyState">
+                        <div class="empty-orb" aria-hidden="true"></div>
+                        <h3>Start a conversation</h3>
+                        <p>Ask anything about today’s BBC news. Answers arrive with sources you can open.</p>
+                    </div>
+                </div>
+
+                <div id="loading" class="loading-state hidden" aria-live="polite">
+                    <div class="ai-orb" aria-hidden="true">
+                        <span class="orb-core"></span>
+                        <span class="orb-ring"></span>
+                        <span class="orb-ring orb-ring-2"></span>
+                        <span class="orb-glow"></span>
+                    </div>
+                    <div class="loading-copy">
+                        <p>Thinking</p>
+                        <div class="loading-dots" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-dock">
+                    <label class="sr-only" for="question">Ask a question about the news</label>
+                    <div class="prompt-box" id="promptBox">
+                        <div class="prompt-glow" aria-hidden="true"></div>
+                        <textarea
+                            id="question"
+                            rows="3"
+                            placeholder=" "
+                            autocomplete="off"
+                            spellcheck="true"
+                        ></textarea>
+                        <span class="floating-label">Ask anything about today’s news…</span>
+                        <div class="prompt-actions">
+                            <span class="hint">Enter to send · Shift+Enter for new line</span>
+                            <div class="prompt-buttons">
+                                <button id="clearInputBtn" class="secondary-btn" type="button">Clear</button>
+                                <button id="askBtn" class="primary-btn" type="button">
+                                    <span class="btn-label">Ask AI</span>
+                                    <span class="btn-shine" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <script src="/static/js/app.js"></script>
 </body>
